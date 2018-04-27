@@ -21,7 +21,7 @@ int main()
     2. Mostrar el listado de usuarios TOLIS
     3. Mostrar el listado de Usuarios con el nombre de la serie que ve TOLIS
     4. Mostrar por cada serie, el nombre de los usuarios que la ven.
-
+*/
 
     mostrarListaSeries(listaDeSeries, TAMSERIE);
     system("pause");
@@ -32,7 +32,6 @@ int main()
     mostrarUsuarioConSuSerie(listaDeUsuarios,TAMUSUARIO,listaDeSeries,TAMSERIE);
     system("pause");
     system("cls");
-  */
     mostrarPersonaxSerie(listaDeSeries,TAMSERIE,listaDeUsuarios,TAMUSUARIO);
 
 
@@ -50,7 +49,7 @@ void mostrarListaSeries(eSerie listaDeSeries[],int tam)
     {
         if(listaDeSeries[i].estado == 1)
         {
-            printf("%d\t%s\t%s\t\t%d\n",listaDeSeries[i].idSerie,listaDeSeries[i].nombre,listaDeSeries[i].genero, listaDeSeries[i].cantidadTemporadas);
+            printf("%d\t%s\t%-10s%10d\n",listaDeSeries[i].idSerie,listaDeSeries[i].nombre,listaDeSeries[i].genero, listaDeSeries[i].cantidadTemporadas);
         }
     }
 
@@ -83,7 +82,8 @@ void mostrarUsuarioConSuSerie(eUsuario listaDeUsuario[],int tamU, eSerie listaDe
         {
             if(listaDeUsuario[i].idSerie == listaDeSerie[j].idSerie && listaDeSerie[j].estado == 1 && listaDeUsuario[i].estado == 1)
             {
-                printf("%s\t\t%s\n",listaDeUsuario[i].nombre,listaDeSerie[j].nombre);
+                printf("%-10s\t\t%10s\n",listaDeUsuario[i].nombre,listaDeSerie[j].nombre);
+                break;
             }
         }
     }
@@ -95,13 +95,17 @@ void mostrarPersonaxSerie(eSerie series[],int tamS,eUsuario usuarios[],int tamU)
 
     for(i=0;i<tamS;i++)
     {
-        printf("Personas que miran %s:\n",series[i].nombre);
-
-        for(j=0;j<tamU;j++)
+        if(series[i].estado == 1)
         {
-            if(series[i].idSerie == usuarios[j].idSerie);
+            printf("%Personas que miran %s\n",series[i].nombre);
+
+            for(j=0;j<tamU;j++)
             {
-                printf("%s\n",usuarios[j].nombre);
+                if(series[i].idSerie == usuarios[j].idSerie)
+                {
+                    printf("%s\n",usuarios[j].nombre);
+                }
+
             }
         }
     }
